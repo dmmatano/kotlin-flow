@@ -68,12 +68,17 @@ StateFlow e SharedFlow são variações de Flow usadas para emitir valores para 
 Eles são hot flows, ou seja, continuam ativos em memória, não dependem de collect() para existir.<br>
 StateFlow -> holder de estado observável. Sempre possui um valor atual, novos coletores recebem o último valor imediatamente<br>
 ```kotlin
-Repository -> Flow
-ViewModel -> StateFlow
+Repository -> Flow (cold)
+ViewModel -> StateFlow (hot)
 UI -> collect()
 StateFlow → estado da UI
 SharedFlow → eventos (ex: navigation, toast, refresh).
 ```
+
+Cold flow:  começa quando o .collect() é chamado. Cada coletor dispara uma nova execução do fluxo.<br>
+Hot flow: Um Hot Flow está ativo independentemente de coletores. <br>
+Você pode transformar um Flow cold em hot usando shareIn.<br>
+
 
 
 
